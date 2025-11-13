@@ -1,0 +1,33 @@
+{
+  "backend": {
+    "healthCheck": {
+      "endpoint": "/health",
+      "interval": 30000,
+      "timeout": 5000
+    },
+    "metrics": {
+      "responseTime": true,
+      "errorRate": true,
+      "requestCount": true
+    }
+  },
+  "frontend": {
+    "webVitals": {
+      "enabled": true,
+      "reportEndpoint": "/api/analytics/vitals"
+    },
+    "errorTracking": {
+      "enabled": true,
+      "sampleRate": 1.0
+    }
+  },
+  "alerts": {
+    "email": "admin@example.com",
+    "slack": "",
+    "thresholds": {
+      "errorRate": 0.05,
+      "responseTime": 1000,
+      "uptime": 0.99
+    }
+  }
+}

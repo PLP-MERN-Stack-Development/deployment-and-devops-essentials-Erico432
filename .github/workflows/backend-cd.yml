@@ -1,0 +1,58 @@
+name: Backend CD
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-cd.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy-render:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Trigger Render Deployment
+      run: |
+        response=$(curl -s -w "\n%{http_code}" -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }})
+        http_code=$(echo "$response" | tail -n1)
+        body=$(echo "$response" | head -n-1)
+        
+        if [ "$http_code" -eq 200 ] || [ "$http_code" -eq 201 ]; then
+          echo "✅ Deployment triggered successfully"
+          echo "Response: $body"
+        else
+          echo "❌ Deployment failed with status code: $http_code"
+          echo "Response: $body"
+          exit 1
+        fi
+    
+    - name: Wait for deployment
+      run: |
+        echo "Waiting for deployment to complete..."
+        sleep 60
+    
+    - name: Health check
+      run: |
+        max_attempts=10
+        attempt=0
+        
+        while [ $attempt -lt $max_attempts ]; do
+          response=$(curl -s -o /dev/null -w "%{http_code}" ${{ secrets.BACKEND_URL }}/health)
+          
+          if [ "$response" -eq 200 ]; then
+            echo "✅ Backend is healthy!"
+            exit 0
+          fi
+          
+          attempt=$((attempt + 1))
+          echo "Attempt $attempt/$max_attempts - Status: $response"
+          sleep 10
+        done
+        
+        echo "❌ Health check failed after $max_attempts attempts"
+        exit 1

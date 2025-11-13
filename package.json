@@ -1,0 +1,23 @@
+{
+  "name": "mern-deployment",
+  "version": "1.0.0",
+  "description": "MERN Stack Deployment - Week 7 Assignment",
+  "scripts": {
+    "setup-env": "bash scripts/setup-env.sh",
+    "health-check": "bash scripts/health-check.sh",
+    "deploy": "bash scripts/deploy.sh",
+    "pre-deploy": "bash scripts/pre-deploy-check.sh",
+    "frontend:install": "cd frontend && npm install",
+    "backend:install": "cd backend && npm install",
+    "install-all": "npm run frontend:install && npm run backend:install",
+    "frontend:dev": "cd frontend && npm start",
+    "backend:dev": "cd backend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "frontend:test": "cd frontend && npm test -- --watchAll=false",
+    "backend:test": "cd backend && npm test",
+    "test": "npm run frontend:test && npm run backend:test"
+  },
+  "keywords": ["mern", "deployment", "devops"],
+  "author": "Your Name",
+  "license": "MIT"
+}

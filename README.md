@@ -1,77 +1,126 @@
-# Deployment and DevOps for MERN Applications
+# Ì∫Ä MERN Stack Deployment - Week 7
 
-This assignment focuses on deploying a full MERN stack application to production, implementing CI/CD pipelines, and setting up monitoring for your application.
+## Ìºê Live Deployment
 
-## Assignment Overview
+| Service | URL | Status |
+|---------|-----|--------|
+| **Frontend** | [Update with your URL] | Ì¥¥ Not Deployed |
+| **Backend** | [Update with your URL] | Ì¥¥ Not Deployed |
+| **Health Check** | [Update with your URL/health] | Ì¥¥ Not Deployed |
 
-You will:
-1. Prepare your MERN application for production deployment
-2. Deploy the backend to a cloud platform
-3. Deploy the frontend to a static hosting service
-4. Set up CI/CD pipelines with GitHub Actions
-5. Implement monitoring and maintenance strategies
+## Ì≥ã Quick Start
 
-## Getting Started
+### 1. Setup Environment
+```bash
+npm run setup-env
+```
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week7-Assignment.md` file
-4. Use the provided templates and configuration files as a starting point
+### 2. Install Dependencies
+```bash
+npm run install-all
+```
 
-## Files Included
+### 3. Configure Environment Variables
 
-- `Week7-Assignment.md`: Detailed assignment instructions
-- `.github/workflows/`: GitHub Actions workflow templates
-- `deployment/`: Deployment configuration files and scripts
-- `.env.example`: Example environment variable templates
-- `monitoring/`: Monitoring configuration examples
+Edit the following files with your actual values:
+- `backend/.env`
+- `frontend/.env`
 
-## Requirements
+### 4. Run Pre-deployment Checks
+```bash
+npm run pre-deploy
+```
 
-- A completed MERN stack application from previous weeks
-- Accounts on the following services:
-  - GitHub
-  - MongoDB Atlas
-  - Render, Railway, or Heroku (for backend)
-  - Vercel, Netlify, or GitHub Pages (for frontend)
-- Basic understanding of CI/CD concepts
+### 5. Deploy
+```bash
+npm run deploy
+```
 
-## Deployment Platforms
+## Ì≥Ç Project Structure
 
-### Backend Deployment Options
-- **Render**: Easy to use, free tier available
-- **Railway**: Developer-friendly, generous free tier
-- **Heroku**: Well-established, extensive documentation
+```
+mern-deployment/
+‚îú‚îÄ‚îÄ .github/workflows/    # GitHub Actions CI/CD
+‚îú‚îÄ‚îÄ backend/             # Express.js API
+‚îú‚îÄ‚îÄ frontend/            # React application
+‚îú‚îÄ‚îÄ scripts/             # Deployment scripts
+‚îú‚îÄ‚îÄ monitoring/          # Monitoring config
+‚îú‚îÄ‚îÄ deployment/          # Deployment docs
+‚îî‚îÄ‚îÄ screenshots/         # Screenshots for submission
+```
 
-### Frontend Deployment Options
-- **Vercel**: Optimized for React apps, easy integration
-- **Netlify**: Great for static sites, good CI/CD
-- **GitHub Pages**: Free, integrated with GitHub
+## Ìª†Ô∏è Available Scripts
 
-## CI/CD Pipeline
+| Script | Description |
+|--------|-------------|
+| `npm run setup-env` | Create .env files from templates |
+| `npm run install-all` | Install all dependencies |
+| `npm run pre-deploy` | Run pre-deployment checks |
+| `npm run deploy` | Deploy application |
+| `npm run health-check` | Check application health |
+| `npm run frontend:dev` | Start frontend development |
+| `npm run backend:dev` | Start backend development |
+| `npm test` | Run all tests |
 
-The assignment includes templates for setting up GitHub Actions workflows:
-- `frontend-ci.yml`: Tests and builds the React application
-- `backend-ci.yml`: Tests the Express.js backend
-- `frontend-cd.yml`: Deploys the frontend to your chosen platform
-- `backend-cd.yml`: Deploys the backend to your chosen platform
+## Ì¥ê GitHub Secrets Required
 
-## Submission
+Add these secrets in your GitHub repository:
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+- `VERCEL_TOKEN` - From Vercel account settings
+- `VERCEL_ORG_ID` - From Vercel project settings
+- `VERCEL_PROJECT_ID` - From Vercel project settings
+- `RENDER_DEPLOY_HOOK_URL` - From Render service settings
+- `BACKEND_URL` - Your deployed backend URL
+- `REACT_APP_API_URL` - Your backend API URL
 
-1. Complete all deployment tasks
-2. Set up CI/CD pipelines with GitHub Actions
-3. Deploy both frontend and backend to production
-4. Document your deployment process in the README.md
-5. Include screenshots of your CI/CD pipeline in action
-6. Add URLs to your deployed applications
+## Ì≥∏ Screenshots
 
-## Resources
+Add your screenshots to the `screenshots/` folder:
+- GitHub Actions pipeline
+- Frontend deployment
+- Backend deployment
+- Monitoring dashboard
 
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [MongoDB Atlas Documentation](https://docs.atlas.mongodb.com/)
-- [Render Documentation](https://render.com/docs)
-- [Railway Documentation](https://docs.railway.app/)
+## Ì∞õ Troubleshooting
+
+### CORS Errors
+Ensure `CORS_ORIGIN` in backend matches your frontend URL exactly.
+
+### Environment Variables Not Loading
+- Verify all variables are set in deployment platform
+- Restart services after updating variables
+- Check variable names are correct (case-sensitive)
+
+### Build Failures
+```bash
+# Clear cache and reinstall
+rm -rf node_modules package-lock.json
+npm install
+```
+
+## Ì≥ö Documentation
+
+- [Deployment Guide](deployment/DEPLOYMENT.md)
+- [MongoDB Atlas Setup](https://docs.atlas.mongodb.com/)
 - [Vercel Documentation](https://vercel.com/docs)
-- [Netlify Documentation](https://docs.netlify.com/) 
+- [Render Documentation](https://render.com/docs)
+
+## ‚úÖ Deployment Checklist
+
+- [ ] MongoDB Atlas cluster created
+- [ ] Backend deployed to Render/Railway
+- [ ] Frontend deployed to Vercel
+- [ ] Environment variables configured
+- [ ] GitHub Actions workflows working
+- [ ] Health checks passing
+- [ ] Monitoring set up
+- [ ] Screenshots added
+- [ ] README updated with URLs
+
+## Ì±§ Author
+
+Your Name - [GitHub Profile](https://github.com/yourusername)
+
+## Ì≥Ñ License
+
+MIT License
